@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Listing;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ListingController extends Controller
 {
     // Show all listings
     public function index()
     {
+        //$users = DB::select('select * from listings');
         return view('listings.index', [
             'listings' => Listing::latest()->filter(request(['tag', 'search']))
                 ->paginate(6)
